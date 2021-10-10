@@ -1,0 +1,123 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>me.time1015.hcm</groupId>
+  <artifactId>hdl-payload-lib</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>${project.groupId}.${project.artifactId}</name>
+  <description>Java library for creating HDL Payload zip files</description>
+
+  <inceptionYear>2021</inceptionYear>
+
+  <properties>
+    <owner>John Daniel Regino</owner>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.plugin.compiler>3.8.1</version.plugin.compiler>
+    <version.plugin.surefire>2.22.2</version.plugin.surefire>
+    <version.plugin.spotbugs>4.2.1</version.plugin.spotbugs>
+    <version.plugin.spotbugs.lib>4.2.3</version.plugin.spotbugs.lib>
+    <version.plugin.license>4.0.rc1</version.plugin.license>
+
+    <version.lib.junit.jupiter>5.5.1</version.lib.junit.jupiter>
+    <version.lib.mockito>2.27.0</version.lib.mockito>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${version.plugin.compiler}</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${version.plugin.surefire}</version>
+          <configuration>
+            <forkCount>0</forkCount>
+            <useSystemClassLoader>false</useSystemClassLoader>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>${version.plugin.spotbugs}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>${version.plugin.spotbugs.lib}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${version.plugin.license}</version>
+          <configuration>
+            <licenseSets>
+              <licenseSet>
+                <header>com/mycila/maven/plugin/license/templates/MIT.txt</header>
+                <excludes>
+                  <exclude>**/license</exclude>
+                  <exclude>**/*.md</exclude>
+                  <exclude>**/.git*</exclude>
+                  <exclude>**/mvnw*</exclude>
+                  <exclude>.mvn/**</exclude>
+                  <exclude>src/test/resources/**</exclude>
+                  <exclude>src/main/resources/**</exclude>
+                </excludes>
+              </licenseSet>
+            </licenseSets>
+            <mapping>
+              <java>JAVAPKG_STYLE</java>
+              <proto>JAVADOC_STYLE</proto>
+            </mapping>
+            <properties>
+              <owner>${owner}</owner>
+            </properties>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>process-sources</phase>
+              <goals>
+                <goal>format</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${version.lib.junit.jupiter}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${version.lib.mockito}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
